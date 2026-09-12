@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OPR FARGO | Personnel & Operations</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(rgba(5,8,12,.82), rgba(5,8,12,.95)),
+        radial-gradient(circle at top right, #5a3516, transparent 35%),
+        #080b0f;
+    color: #e8e8e8;
+    min-height: 100vh;
+}
+
+header {
+    border-bottom: 1px solid #4b351f;
+    background: rgba(8,11,15,.95);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #f2a43a;
+}
+
+.logo span {
+    color: #ddd;
+}
+
+nav a {
+    color: #aaa;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+nav a:hover {
+    color: #f2a43a;
+}
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 90px 25px 55px;
+}
+
+.classified {
+    color: #f2a43a;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 78px);
+    line-height: .95;
+    letter-spacing: 3px;
+}
+
+h1 span {
+    color: #f2a43a;
+}
+
+.hero p {
+    max-width: 700px;
+    margin-top: 25px;
+    color: #9b9b9b;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 22px;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 1px solid #f2a43a;
+    color: #f2a43a;
+}
+
+.btn.primary {
+    background: #f2a43a;
+    color: #080b0f;
+}
+
+.section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 25px;
+}
+
+.section-title {
+    font-size: 12px;
+    color: #f2a43a;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    background: rgba(18,22,27,.85);
+    border: 1px solid #293038;
+    padding: 25px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: #eee;
+}
+
+.stat-label {
+    margin-top: 8px;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.search-box {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 17px;
+    background: #10151a;
+    border: 1px solid #333b43;
+    color: white;
+    outline: none;
+}
+
+.search-box button {
+    padding: 0 25px;
+    background: #f2a43a;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.personnel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: #10151a;
+    border: 1px solid #293038;
+    padding: 22px;
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: #f2a43a;
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    background: #252c33;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    color: #f2a43a;
+    border: 1px solid #4b351f;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.rank {
+    color: #f2a43a;
+    font-size: 11px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.card-info {
+    border-top: 1px solid #292f35;
+    padding-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.info-label {
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+.leaderboard {
+    background: #10151a;
+    border: 1px solid #293038;
+}
+
+.player-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 120px 120px 100px;
+    padding: 18px;
+    border-bottom: 1px solid #242a30;
+    align-items: center;
+}
+
+.player-row:last-child {
+    border-bottom: none;
+}
+
+.player-row.header {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.rank-number {
+    color: #f2a43a;
+    font-weight: bold;
+}
+
+.kd {
+    font-weight: bold;
+}
+
+.server {
+    border: 1px solid #293038;
+    background: #10151a;
+    padding: 25px;
+}
+
+.online {
+    color: #55d68a;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 60px;
+    border-top: 1px solid #293038;
+    padding: 30px 25px;
+    text-align: center;
+    color: #555;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+@media(max-width:800px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .personnel {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .player-row {
+        grid-template-columns: 40px 1fr 70px;
+    }
+
+    .player-row .hide-mobile {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">OPR <span>FARGO</span></div>
+
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#personnel">PERSONNEL</a>
+            <a href="#leaderboard">LEADERBOARD</a>
+            <a href="#server">SERVER</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+
+    <div class="classified">
+        CLASSIFIED // COMMUNITY OPERATIONS
+    </div>
+
+    <h1>
+        OPR FARGO<br>
+        <span>PERSONNEL SYSTEM</span>
+    </h1>
+
+    <p>
+        Community-built personnel and operations platform for
+        tracking players, statistics, operations and server activity.
+        Built for the next generation of OPR FARGO.
+    </p>
+
+    <div class="buttons">
+        <a href="#personnel" class="btn primary">VIEW PERSONNEL</a>
+        <a href="#leaderboard" class="btn">LEADERBOARD</a>
+    </div>
+
+</section>
+
+<section class="section">
+
+    <div class="section-title">
+        COMMUNITY OVERVIEW
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-number">14,364</div>
+            <div class="stat-label">MEMBERS</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">53</div>
+            <div class="stat-label">OPERATIVES ONLINE</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">142</div>
+            <div class="stat-label">OPERATIONS</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">COMMUNITY</div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section" id="personnel">
+
+    <div class="section-title">
+        PERSONNEL DATABASE
+    </div>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search personnel..."
+            onkeyup="searchPlayers()"
+        >
+        <button>SEARCH</button>
+    </div>
+
+    <div class="personnel" id="personnelList">
+
+        <div class="card" data-name="Spoodeermaan">
+            <div class="card-top">
+                <div class="avatar">SP</div>
+
+                <div>
+                    <div class="name">Spoodeermaan</div>
+                    <div class="rank">CORPORAL // OPR</div>
+                </div>
+            </div>
+
+            <div class="card-info">
+
+                <div>
+                    <div class="info-label">KILLS</div>
+                    <div class="info-value">384</div>
+                </div>
+
+                <div>
+                    <div class="info-label">DEATHS</div>
+                    <div class="info-value">127</div>
+                </div>
+
+                <div>
+                    <div class="info-label">K/D</div>
+                    <div class="info-value">3.02</div>
+                </div>
+
+                <div>
+                    <div class="info-label">PLAYTIME</div>
+                    <div class="info-value">147h</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Operator Alpha">
+            <div class="card-top">
+                <div class="avatar">OA</div>
+
+                <div>
+                    <div class="name">Operator Alpha</div>
+                    <div class="rank">SERGEANT // OPR</div>
+                </div>
+            </div>
+
+            <div class="card-info">
+
+                <div>
+                    <div class="info-label">KILLS</div>
+                    <div class="info-value">1,284</div>
+                </div>
+
+                <div>
+                    <div class="info-label">DEATHS</div>
+                    <div class="info-value">312</div>
+                </div>
+
+                <div>
+                    <div class="info-label">K/D</div>
+                    <div class="info-value">4.12</div>
+                </div>
+
+                <div>
+                    <div class="info-label">PLAYTIME</div>
+                    <div class="info-value">386h</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Operator Bravo">
+            <div class="card-top">
+                <div class="avatar">OB</div>
+
+                <div>
+                    <div class="name">Operator Bravo</div>
+                    <div class="rank">LIEUTENANT // OPR</div>
+                </div>
+            </div>
+
+            <div class="card-info">
+
+                <div>
+                    <div class="info-label">KILLS</div>
+                    <div class="info-value">967</div>
+                </div>
+
+                <div>
+                    <div class="info-label">DEATHS</div>
+                    <div class="info-value">284</div>
+                </div>
+
+                <div>
+                    <div class="info-label">K/D</div>
+                    <div class="info-value">3.40</div>
+                </div>
+
+                <div>
+                    <div class="info-label">PLAYTIME</div>
+                    <div class="info-value">301h</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="leaderboard">
+
+    <div class="section-title">
+        COMBAT LEADERBOARD
+    </div>
+
+    <div class="leaderboard">
+
+        <div class="player-row header">
+            <div>#</div>
+            <div>OPERATIVE</div>
+            <div class="hide-mobile">KILLS</div>
+            <div class="hide-mobile">DEATHS</div>
+            <div>K/D</div>
+        </div>
+
+        <div class="player-row">
+            <div class="rank-number">01</div>
+            <div>Operator Alpha</div>
+            <div class="hide-mobile">1,284</div>
+            <div class="hide-mobile">312</div>
+            <div class="kd">4.12</div>
+        </div>
+
+        <div class="player-row">
+            <div class="rank-number">02</div>
+            <div>Operator Bravo</div>
+            <div class="hide-mobile">967</div>
+            <div class="hide-mobile">284</div>
+            <div class="kd">3.40</div>
+        </div>
+
+        <div class="player-row">
+            <div class="rank-number">03</div>
+            <div>Spoodeermaan</div>
+            <div class="hide-mobile">384</div>
+            <div class="hide-mobile">127</div>
+            <div class="kd">3.02</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section" id="server">
+
+    <div class="section-title">
+        SERVER STATUS
+    </div>
+
+    <div class="server">
+
+        <h2>OPR FARGO // MAIN OPERATIONS</h2>
+
+        <p style="margin-top:15px;color:#777;">
+            STATUS:
+            <span class="online">● ONLINE</span>
+        </p>
+
+        <p style="margin-top:10px;color:#aaa;">
+            Players: 53 / 128
+        </p>
+
+        <p style="margin-top:10px;color:#aaa;">
+            Mission: Conflict
+        </p>
+
+        <p style="margin-top:10px;color:#aaa;">
+            Current Map: Everon
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+    OPR FARGO PERSONNEL SYSTEM // COMMUNITY PROPOSAL
+    <br><br>
+    DEMONSTRATION DATA — NOT CONNECTED TO LIVE SERVER
+</footer>
+
+
+<script>
+
+function searchPlayers() {
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const players =
+        document.querySelectorAll(".card");
+
+    players.forEach(player => {
+
+        const name =
+            player.dataset.name.toLowerCase();
+
+        if (name.includes(search)) {
+            player.style.display = "block";
+        } else {
+            player.style.display = "none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
